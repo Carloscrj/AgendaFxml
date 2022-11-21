@@ -2,6 +2,7 @@ package com.example.agendaactividad.modelo;
 
 import java.time.LocalDate;
 
+import com.example.agendaactividad.util.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -9,10 +10,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
- * Model class for a Person.
+ * Clase modelo para una persona.
  *
- * @author Marco Jakob
+ *
  */
 public class Person {
 
@@ -24,14 +27,15 @@ public class Person {
     private final ObjectProperty<LocalDate> birthday;
 
     /**
-     * Default constructor.
+     * Constructor predeterminado
      */
     public Person() {
         this(null, null);
     }
 
     /**
-     * Constructor with some initial data.
+     *
+     * Constructor con algunos datos iniciales
      *
      * @param firstName
      * @param lastName
@@ -40,7 +44,7 @@ public class Person {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
 
-        // Some initial dummy data, just for convenient testing.
+        // Algunos datos ficticios iniciales, solo para pruebas convenientes
         this.street = new SimpleStringProperty("some street");
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
@@ -107,6 +111,7 @@ public class Person {
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }
